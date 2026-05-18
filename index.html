@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UzbekGen — Sales Cheatsheet</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0e1a;
+  --bg-card:#111827;
+  --bg-elev:#161f33;
+  --border:#1f2b46;
+  --border-hi:#334155;
+  --text:#e8ecf3;
+  --text-dim:#94a3b8;
+  --text-mute:#64748b;
+  --green:#4ade80;
+  --cyan:#22d3ee;
+  --amber:#fbbf24;
+  --purple:#a78bfa;
+  --red:#f87171;
+  --pink:#f472b6;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+/* TOP BAR */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(10,14,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 24px}
+.topbar-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.logo{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.nav a{color:var(--text-dim);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:8px;transition:all 0.15s;font-weight:500}
+.nav a:hover{color:var(--text);background:var(--bg-elev)}
+.lang-toggle{display:flex;gap:4px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:3px}
+.lang-btn{background:transparent;border:none;color:var(--text-dim);padding:6px 12px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;transition:all 0.15s}
+.lang-btn.active{background:var(--green);color:var(--bg)}
+
+/* HERO */
+.hero{padding:60px 24px 40px;background:linear-gradient(135deg,#0d1424 0%,#15203a 100%);border-bottom:1px solid var(--border);text-align:center}
+.hero h1{font-size:52px;font-weight:800;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px;letter-spacing:-1px;line-height:1.1}
+.hero p{font-size:18px;color:var(--text-dim);max-width:680px;margin:0 auto 24px}
+.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:32px}
+.hero-stat{text-align:center}
+.hero-stat .v{font-size:32px;font-weight:800;color:var(--green)}
+.hero-stat .l{font-size:12px;color:var(--text-mute);text-transform:uppercase;letter-spacing:1px}
+
+.container{max-width:1400px;margin:0 auto;padding:40px 24px}
+.section{margin-bottom:80px;scroll-margin-top:80px}
+.section-head{margin-bottom:32px}
+.section-eyebrow{font-size:12px;color:var(--green);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.section-title{font-size:36px;font-weight:800;color:#f8fafc;letter-spacing:-0.5px}
+.section-sub{color:var(--text-dim);font-size:16px;margin-top:8px}
+
+/* PRINCIPLES */
+.principles{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:900px){.principles{grid-template-columns:repeat(2,1fr)}}
+.principle{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;border-top:3px solid var(--green);transition:all 0.2s}
+.principle:hover{transform:translateY(-3px);border-top-color:var(--cyan)}
+.principle .num{font-size:32px;font-weight:900;color:var(--green);line-height:1}
+.principle .text{color:var(--text);font-size:14px;font-weight:500;margin-top:10px}
+
+/* STEPS */
+.step{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:32px;margin-bottom:24px;position:relative;overflow:hidden;scroll-margin-top:80px}
+.step-bg-num{position:absolute;top:-30px;right:-10px;font-size:200px;font-weight:900;color:rgba(74,222,128,0.04);line-height:1;pointer-events:none}
+.step-head{display:flex;align-items:center;gap:16px;margin-bottom:20px;position:relative}
+.step-badge{background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800}
+.step-titles{flex:1}
+.step-titles h3{font-size:22px;color:#f1f5f9;font-weight:700}
+.step-time{font-size:13px;color:var(--amber);font-weight:600;margin-top:2px}
+.step-goal{background:var(--bg-elev);border-left:3px solid var(--cyan);padding:14px 18px;border-radius:8px;margin-bottom:20px;position:relative;font-size:14px}
+.step-goal strong{color:var(--cyan)}
+.step-content{position:relative}
+.script-block{background:var(--bg-elev);border:1px solid var(--border);border-radius:12px;padding:20px;margin:14px 0}
+.script-block .label{font-size:11px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+.script-block .text{color:var(--text);font-size:15px;font-style:italic;line-height:1.7}
+.script-block .text.uz{display:none}
+.script-block .text.ru{display:block}
+body.lang-uz .script-block .text.uz{display:block}
+body.lang-uz .script-block .text.ru{display:none}
+.hint{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);border-radius:10px;padding:12px 16px;margin:10px 0;font-size:13px;color:#fde68a}
+.hint strong{color:var(--amber)}
+.danger{background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);border-radius:10px;padding:12px 16px;margin:10px 0;font-size:13px;color:#fca5a5}
+.danger strong{color:var(--red)}
+
+.q-list{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.q-item{background:var(--bg-elev);border:1px solid var(--border);border-radius:10px;padding:14px 18px;font-size:14px;display:flex;gap:14px;align-items:flex-start}
+.q-item .qnum{color:var(--green);font-weight:800;font-size:16px;min-width:24px}
+.q-item .qtxt{flex:1;color:var(--text);line-height:1.6}
+.q-item .qtxt .uz{display:none;font-style:italic;color:#a7f3d0}
+.q-item .qtxt .ru{display:block}
+body.lang-uz .q-item .qtxt .uz{display:block}
+body.lang-uz .q-item .qtxt .ru{display:none}
+
+/* CHARTS */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:900px){.charts-grid{grid-template-columns:1fr}}
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px}
+.chart-card h4{font-size:16px;margin-bottom:18px;color:#f1f5f9}
+.chart-wrapper{position:relative;height:300px}
+
+/* VALUE STACK / PRICING */
+.tariffs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:1000px){.tariffs{grid-template-columns:1fr}}
+.tariff{background:var(--bg-card);border:2px solid var(--border);border-radius:18px;padding:28px;position:relative;display:flex;flex-direction:column}
+.tariff.beta{border-color:var(--green);background:linear-gradient(180deg,rgba(74,222,128,0.05),var(--bg-card) 30%)}
+.tariff.premium{border-color:var(--cyan);background:linear-gradient(180deg,rgba(34,211,238,0.05),var(--bg-card) 30%);transform:scale(1.02)}
+.tariff.vip{border-color:var(--purple);background:linear-gradient(180deg,rgba(167,139,250,0.05),var(--bg-card) 30%)}
+.tariff-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:5px 14px;border-radius:14px;font-size:11px;font-weight:800;letter-spacing:0.5px}
+.tariff.beta .tariff-tag{background:var(--green);color:var(--bg)}
+.tariff.premium .tariff-tag{background:var(--cyan);color:var(--bg)}
+.tariff.vip .tariff-tag{background:var(--purple);color:var(--bg)}
+.tariff-name{font-size:14px;color:var(--text-mute);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;margin-top:8px}
+.tariff-price{font-size:38px;font-weight:800;color:#f8fafc;line-height:1}
+.tariff-price .cur{font-size:16px;color:var(--text-mute);font-weight:500}
+.tariff-anchor{font-size:13px;color:var(--text-mute);margin-top:6px;text-decoration:line-through;text-decoration-color:var(--red)}
+.tariff-saving{font-size:13px;color:var(--green);font-weight:700;margin-top:4px}
+.tariff hr{border:none;height:1px;background:var(--border);margin:18px 0}
+.tariff-features{list-style:none;flex:1}
+.tariff-features li{padding:8px 0;font-size:13.5px;color:var(--text);display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed var(--border)}
+.tariff-features li:before{content:"✓";color:var(--green);font-weight:bold;flex-shrink:0}
+.tariff-features li.bonus{color:var(--amber);font-weight:600}
+.tariff-features li.bonus:before{content:"🎁"}
+
+/* VALUE STACK TABLE */
+.vstack{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:20px}
+.vstack h4{color:#f1f5f9;font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.vstack table{width:100%;border-collapse:collapse}
+.vstack th{text-align:left;font-size:11px;color:var(--text-mute);text-transform:uppercase;letter-spacing:1px;padding:8px 12px;border-bottom:1px solid var(--border)}
+.vstack th:nth-child(2),.vstack th:nth-child(3){text-align:right}
+.vstack td{padding:10px 12px;font-size:13.5px;color:var(--text);border-bottom:1px solid var(--border)}
+.vstack td:nth-child(2){text-align:right;color:var(--text-dim);font-variant-numeric:tabular-nums}
+.vstack td:nth-child(3){text-align:right;color:var(--green);font-weight:600}
+.vstack .total td{background:var(--bg-elev);font-weight:700;border:none;font-size:15px}
+.vstack .total td:nth-child(2){color:var(--red);text-decoration:line-through}
+.vstack .total td:nth-child(3){color:var(--green);font-size:18px}
+.vstack .saving-row td{background:rgba(74,222,128,0.08);color:var(--green);font-weight:800;border:none}
+
+/* OBJECTIONS */
+.objs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:900px){.objs{grid-template-columns:1fr}}
+.obj{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--red)}
+.obj .obj-q{color:var(--red);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+.obj .obj-a{color:var(--text);font-size:14px;font-style:italic;line-height:1.7}
+.obj .obj-a .uz{display:none;color:#a7f3d0}
+body.lang-uz .obj .obj-a .uz{display:block}
+body.lang-uz .obj .obj-a .ru{display:none}
+
+/* CASES */
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:900px){.cases{grid-template-columns:1fr}}
+.case{background:linear-gradient(135deg,var(--bg-card),#0f1729);border:1px solid var(--border);border-radius:16px;padding:28px}
+.case h4{font-size:24px;margin-bottom:4px}
+.case .meta{color:var(--text-dim);font-size:14px;margin-bottom:18px}
+.case-stats{display:flex;gap:12px;margin-bottom:18px}
+.case-stat{flex:1;background:rgba(74,222,128,0.07);border-radius:10px;padding:14px;text-align:center}
+.case-stat .v{font-size:24px;font-weight:800;color:var(--green)}
+.case-stat .l{font-size:11px;color:var(--text-mute);text-transform:uppercase;margin-top:4px}
+.case .story{color:var(--text-dim);font-size:14px;font-style:italic;line-height:1.7}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:36px;margin-top:20px}
+.timeline:before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--green),var(--cyan))}
+.tl-item{position:relative;margin-bottom:24px;padding-left:24px}
+.tl-item:before{content:"";position:absolute;left:-32px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--green);border:4px solid var(--bg)}
+.tl-item .day{font-size:12px;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.tl-item .text{color:var(--text);font-size:14.5px;margin-top:4px}
+
+/* CHECKLIST */
+.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.checks{grid-template-columns:1fr}}
+.check-col{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:22px}
+.check-col h4{color:var(--cyan);font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.check-list{list-style:none}
+.check-list li{padding:8px 0;color:var(--text);font-size:13.5px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start;cursor:pointer;user-select:none}
+.check-list li:before{content:"";width:16px;height:16px;border:2px solid var(--text-mute);border-radius:4px;flex-shrink:0;margin-top:3px;transition:all 0.15s}
+.check-list li.done{color:var(--text-mute);text-decoration:line-through}
+.check-list li.done:before{background:var(--green);border-color:var(--green);content:"✓";color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;line-height:1}
+
+/* MECHANIC */
+.mech-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:900px){.mech-grid{grid-template-columns:repeat(2,1fr)}}
+.mech-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;transition:all 0.2s}
+.mech-card:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.mech-card .step-no{font-size:11px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.mech-card h4{font-size:16px;color:#f1f5f9;margin:6px 0 10px}
+.mech-card p{color:var(--text-dim);font-size:13px;line-height:1.6}
+
+/* FOOTER */
+footer{text-align:center;padding:40px 24px 60px;color:var(--text-mute);border-top:1px solid var(--border);font-size:13px;background:#0a0e1a}
+
+/* HIDE ALL UZ BY DEFAULT, SHOW WHEN LANG-UZ */
+.uz-text{display:none}
+body.lang-uz .uz-text{display:inline}
+body.lang-uz .ru-text{display:none}
+
+.tab-pair{display:grid;grid-template-columns:1fr;gap:0}
+.tab-pair .ru-block, .tab-pair .uz-block{padding:0}
+.tab-pair .uz-block{display:none}
+body.lang-uz .tab-pair .uz-block{display:block}
+body.lang-uz .tab-pair .ru-block{display:none}
+
+.menu-close{background:var(--bg-card);border:2px solid var(--purple);border-radius:18px;padding:28px;margin-top:24px;position:relative}
+.menu-close:before{content:"VIP ANCHOR";position:absolute;top:-12px;left:24px;background:var(--purple);color:var(--bg);font-size:11px;font-weight:800;padding:4px 12px;border-radius:10px;letter-spacing:1px}
+.menu-close h4{color:#f1f5f9;font-size:18px;margin-bottom:14px}
+.menu-close p{color:var(--text-dim);font-size:14px;line-height:1.7;font-style:italic}
+.menu-close .num-highlight{color:var(--green);font-weight:700;font-size:16px}
+</style>
+</head>
+<body class="lang-ru">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">UzbekGen</div>
+    <nav class="nav">
+      <a href="#principles">Принципы</a>
+      <a href="#steps">8 шагов</a>
+      <a href="#mech">Механизм</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#vstack">Value Stack</a>
+      <a href="#close">Menu Close</a>
+      <a href="#economy">Экономика</a>
+      <a href="#objs">Возражения</a>
+      <a href="#followup">Follow-up</a>
+      <a href="#checklist">Чеклист</a>
+    </nav>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="uz">UZ</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Sales Cheatsheet</h1>
+  <p>Боевой скрипт продаж · 8 шагов · Value Stack · Menu Close. Переключай RU ⇄ UZ — используй прямо на звонке.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="v">8</div><div class="l">шагов</div></div>
+    <div class="hero-stat"><div class="v">25–40</div><div class="l">мин звонок</div></div>
+    <div class="hero-stat"><div class="v">3</div><div class="l">тарифа</div></div>
+    <div class="hero-stat"><div class="v">70/30</div><div class="l">слушай/говори</div></div>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- PRINCIPLES -->
+<section class="section" id="principles">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="ru-text">Главные принципы</span><span class="uz-text">Asosiy qoidalar</span></div>
+    <h2 class="section-title"><span class="ru-text">5 правил которые продают</span><span class="uz-text">Sotuvni amalga oshiradigan 5 ta qoida</span></h2>
+  </div>
+  <div class="principles">
+    <div class="principle">
+      <div class="num">01</div>
+      <div class="text"><span class="ru-text">Слушай 70%, говори 30%</span><span class="uz-text">70% tinglang, 30% gapiring</span></div>
+    </div>
+    <div class="principle">
+      <div class="num">02</div>
+      <div class="text"><span class="ru-text">Записывай ответы дословно</span><span class="uz-text">Javoblarni so'zma-so'z yozing</span></div>
+    </div>
+    <div class="principle">
+      <div class="num">03</div>
+      <div class="text"><span class="ru-text">Не перебивай</span><span class="uz-text">Gapni bo'lmang</span></div>
+    </div>
+    <div class="principle">
+      <div class="num">04</div>
+      <div class="text"><span class="ru-text">После цены — молчи 30 сек</span><span class="uz-text">Narxdan keyin 30 soniya jim</span></div>
+    </div>
+    <div class="principle">
+      <div class="num">05</div>
+      <div class="text"><span class="ru-text">Не дави. Уверенность продаёт</span><span class="uz-text">Bosim qilmang. Ishonch sotadi</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMING CHART -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="ru-text">Тайминг звонка</span><span class="uz-text">Suhbat vaqti</span></div>
+    <h2 class="section-title"><span class="ru-text">Распределение времени по шагам</span><span class="uz-text">Bosqichlar bo'yicha vaqt taqsimoti</span></h2>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h4><span class="ru-text">Минуты на шаг</span><span class="uz-text">Bosqichga daqiqalar</span></h4>
+      <div class="chart-wrapper"><canvas id="timingChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h4><span class="ru-text">Правило 70/30</span><span class="uz-text">70/30 qoidasi</span></h4>
+      <div class="chart-wrapper"><canvas id="listenChart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 STEPS -->
+<section class="section" id="steps">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="ru-text">Основа</span><span class="uz-text">Asosiy</span></div>
+    <h2 class="section-title"><span class="ru-text">8 шагов диагностики</span><span class="uz-text">Diagnostika 8 bosqichi</span></h2>
+    <p class="section-sub"><span class="ru-text">Rapport-first структура. Каждый шаг готовит следующий.</span><span class="uz-text">Rapport-first tuzilma. Har bir bosqich keyingisini tayyorlaydi.</span></p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step" id="step1">
+    <div class="step-bg-num">1</div>
+    <div class="step-head">
+      <div class="step-badge">1</div>
+      <div class="step-titles">
+        <h3><span class="ru-text">Приветствие и настрой</span><span class="uz-text">Salomlashish va sozlanish</span></h3>
+        <div class="step-time">1–2 <span class="ru-text">минуты</span><span class="uz-text">daqiqa</span></div>
+      </div>
+    </div>
+    <div class="step-goal">
+      <strong><span class="ru-text">Цель:</span><span class="uz-text">Maqsad:</span></strong>
+      <span class="ru-text"> Снять напряжение. Это разговор, не допрос.</span>
+      <span class="uz-text"> Zo'riqishni olib tashlash. Bu suhbat, so'roq emas.</span>
+    </div>
+    <div class="script-block">
+      <div class="label">Script</div>
+      <div class="text ru">«Ассалому алайкум, [ИСМ]. Меня зовут Фахрийор, команда UzbekGen. Как настроение? Наш разговор займёт 25–30 минут. Я изучу вашу ситуацию, потом покажу решение. Согласны?»</div>
+      <div class="text uz">«Assalomu alaykum, [KLIENT ISMI]. Ismim Faxriyor, UzbekGen komandasidan. Yaxshimisiz, kayfiyat qanday? Suhbatimiz 25–30 daqiqacha bo'lib o'tadi. Sizning holatingizni o'rganib chiqaman, keyin sizga yechim ko'rsataman. Bo'ladimi?»</div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="step2">
+    <div class="step-bg-num">2</div>
+    <div class="step-head">
+      <div class="step-badge">2</div>
+      <div class="step-titles">
+        <h3><span class="ru-text">Разогрев и доверие</span><span class="uz-text">Qizdirish va ishonch</span></h3>
+        <div class="step-time">3–4 <span class="ru-text">минуты</span><span class="uz-text">daqiqa</span></div>
+      </div>
+    </div>
+    <div class="step-goal">
+      <strong><span class="ru-text">Цель:</span><span class="uz-text">Maqsad:</span></strong>
+      <span class="ru-text"> Человек выговорится. Самый недооценённый этап.</span>
+      <span class="uz-text"> Inson o'zini ochishi kerak. Eng kam baholangan bosqich.</span>
+    </div>
+    <div class="script-block">
+      <div class="label">Q1 — <span class="ru-text">Работа</span><span class="uz-text">Ish</span></div>
+      <div class="text ru">«Сначала мне важно понять вашу ситуацию. Расскажите о себе — чем занимаетесь, откуда?»</div>
+      <div class="text uz">«Birinchi navbatda — sizni holatingizni tushunib olishim kerak. O'zingiz haqida qisqacha gapirib bering — nima ish qilasiz, qayerdansiz?»</div>
+    </div>
+    <div class="script-block">
+      <div class="label">Q2 — <span class="ru-text">Семья</span><span class="uz-text">Oila</span></div>
+      <div class="text ru">«Семья есть? Дети?»</div>
+      <div class="text uz">«Oilangiz bormi? Bolalar?»</div>
+    </div>
+    <div class="script-block">
+      <div class="label">Q3 — <span class="ru-text">Источник</span><span class="uz-text">Manba</span></div>
+      <div class="text ru">«А теперь о главном — что вас зацепило в нашем проекте? Reels увидели, статью прочитали или знакомый рассказал?»</div>
+      <div class="text uz">«Endi gap aslida nima haqida — sizga bizning loyihaga nimasi qiziq bo'lib qoldi? Reels ko'rdingizmi, maqolani o'qidingizmi yoki tanishingiz aytdimi?»</div>
+    </div>
+    <div class="hint"><strong>Tip:</strong> <span class="ru-text">Для Uzbek ICP семья всегда в центре. Это даёт «температуру» — горячий или холодный лид.</span><span class="uz-text">Uzbek ICP uchun oila har doim markazda. Bu sizga "harorat"ni ko'rsatadi — issiq yoki sovuq lead.</span></div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="step3">
+    <div class="step-bg-num">3</div>
+    <div class="step-head">
+      <div class="step-badge">3</div>
+      <div class="step-titles">
+        <h3><span class="ru-text">Выявление боли</span><span class="uz-text">Og'riqni aniqlash</span></h3>
+        <div class="step-time">5–6 <span class="ru-text">минут</span><span class="uz-text">daqiqa</span></div>
+      </div>
+    </div>
+    <div class="step-goal">
+      <strong><span class="ru-text">Цель:</span><span class="uz-text">Maqsad:</span></strong>
+      <span class="ru-text"> Докопаться до сути. Не давить. Задавать и слушать.</span>
+      <span class="uz-text"> Asl mohiyatga yetib borish. Bosim qilmaslik. So'rang va tinglang.</span>
+    </div>
+    <div class="q-list">
+      <div class="q-item"><div class="qnum">1</div><div class="qtxt"><div class="ru">Что вас больше всего беспокоит? Живот, упадок энергии или другое?</div><div class="uz">Aslida sizga eng ko'p tashvish berayotgan narsa nima? Qorinmi, energiya kamayishi, yoki boshqa narsa?</div></div></div>
+      <div class="q-item"><div class="qnum">2</div><div class="qtxt"><div class="ru">Когда это началось? После свадьбы, работы, рождения детей?</div><div class="uz">Qachondan boshlab bu muammo paydo bo'ldi? To'ydan keyinmi, ish boshlanganidan keyinmi, bolalar tug'ilgandan keyinmi?</div></div></div>
+      <div class="q-item"><div class="qnum">3</div><div class="qtxt"><div class="ru">Как это влияет на жизнь сейчас, конкретно?</div><div class="uz">Hozir bu sizga aniq qanday ta'sir qilyapti? Ya'ni hayot turmushingizda.</div></div></div>
+      <div class="q-item"><div class="qnum">4</div><div class="qtxt"><div class="ru">Что пробовали раньше? Зал, диеты, БАДы?</div><div class="uz">Avval nimalar qilib ko'rgansiz? Zal, parhez, BAD?</div></div></div>
+      <div class="q-item"><div class="qnum">5</div><div class="qtxt"><div class="ru">Сколько дней удавалось продержаться? Почему бросили?</div><div class="uz">Eng uzun necha kun ushlab turolgansiz? Nima sababdan tashlab yuborgansiz?</div></div></div>
+      <div class="q-item"><div class="qnum">6</div><div class="qtxt"><div class="ru">Если ничего не изменится — через 6 месяцев, год что будет?</div><div class="uz">Agar hech narsa o'zgarmasa — 6 oydan, 1 yildan keyin nimalar bo'ladi sizning hayotingizda? Nima deb o'ylaysiz?</div></div></div>
+    </div>
+    <div class="hint"><strong>Запомни:</strong> <span class="ru-text">Если скажет «iroda yo'q», «vaqt yo'q», «boshlayman tashlab yuboraman» — записывай дословно. Используешь в шаге 6 и 7.</span><span class="uz-text">Agar "iroda yo'q", "vaqt yo'q", "boshlayman tashlab yuboraman" desa — so'zma-so'z yozing. 6 va 7-bosqichda ishlatasiz.</span></div>
+    <div class="danger"><strong>⛔</strong> <span class="ru-text">Не объясняй про кортизол здесь. Это в шаге 5.</span><span class="uz-text">Bu yerda kortizol haqida tushuntirmang. Bu 5-bosqichda.</span></div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step" id="step4">
+    <div class="step-bg-num">4</div>
+    <div class="step-head">
+      <div class="step-badge">4</div>
+      <div class="step-titles">
+        <h3><span class="ru-text">Выявление желаний</span><span class="uz-text">Istaklarni aniqlash</span></h3>
+        <div class="step-time">3–4 <span class="ru-text">минуты</span><span class="uz-text">daqiqa</span></div>
+      </div>
+    </div>
+    <div class="step-goal">
+      <strong><span class="ru-text">Цель:</span><span class="uz-text">Maqsad:</span></strong>
+      <span class="ru-text"> Вытащить dream outcome его словами. Боль — «не хочу». Деньги платят за «хочу».</span>
+      <span class="uz-text"> Dream outcome'ni uning so'zlari bilan olish. Og'riq — "xohlamayman". Pul "xohlayman" uchun to'lanadi.</span>
+    </div>
+    <div class="script-block">
+      <div class="label">Q1</div>
+      <div class="text ru">«Представьте — через 3 месяца, осенью. Всё на своих местах. Как выглядит ваша жизнь?»</div>
+      <div class="text uz">«Endi boshqa tomondan qaraymiz. Tasavvur qiling — 3 oydan keyin, kuzda. Hammasi joyiga kelgan. Sizning hayotingiz qanday ko'rinadi?»</div>
+    </div>
+    <div class="script-block">
+      <div class="label">Q2</div>
+      <div class="text ru">«Как себя чувствуете утром?»</div>
+      <div class="text uz">«Qanday his qilasiz o'zingizni ertalab?»</div>
+    </div>
+    <div class="script-block">
+      <div class="label">Q3</div>
+      <div class="text ru">«Что меняется в семье? С женой, с детьми?»</div>
+      <div class="text uz">«Oilangizda nima o'zgaradi? Xotin bilan, bolalar bilan?»</div>
+    </div>
+    <div class="script-block">
+      <div class="label">Q4 — <span class="ru-text">Золотой вопрос</span><span class="uz-text">Oltin savol</span></div>
+      <div class="text ru">«Что для вас самое важное — какой результат сильнее всего мотивирует?»</div>
+      <div class="text uz">«Sizga eng muhim narsa nima — qaysi natija sizni eng ko'p motivatsiya beradi?»</div>
+    </div>
+    <div class="hint"><strong>★</strong> <span class="ru-text">Записывай ответ на 4-й вопрос дословно — используешь в шаге 7 при close.</span><span class="uz-text">4-savolga javobni so'zma-so'z yozing — 7-bosqichda close paytida ishlatasiz.</span></div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step" id="step5">
+    <div class="step-bg-num">5</div>
+    <div class="step-head">
+      <div class="step-badge">5</div>
+      <div class="step-titles">
+        <h3><span class="ru-text">Путь + презентация</span><span class="uz-text">Yo'l + taqdimot</span></h3>
+        <div class="step-time">4–5 <span class="ru-text">минут</span><span class="uz-text">daqiqa</span></div>
+      </div>
+    </div>
+    <div class="step-goal">
+      <strong><span class="ru-text">Цель:</span><span class="uz-text">Maqsad:</span></strong>
+      <span class="ru-text"> Показать систему. Без жаргона, без лекции.</span>
+      <span class="uz-text"> Tizimni ko'rsatish. Jargonsiz, ma'ruzasiz.</span>
+    </div>
+    <div class="script-block">
+      <div class="label"><span class="ru-text">Переход</span><span class="uz-text">O'tish</span></div>
+      <div class="text ru">«[Имя], я вас понял. Ваша ситуация мне знакома — 50+ моих клиентов прошли тот же путь. Сейчас расскажу, что даёт результат и почему предыдущие попытки не работали.»</div>
+      <div class="text uz">«[Klient ismi], men sizni tushundim. Sizning holatingiz menga juda tanish — mening 50+ mijozim aynan shu yo'ldan o'tgan. Endi men sizga aytaman aynan nima qiladi natija — va nima uchun avvalgi urinishlar ishlamagan.»</div>
+    </div>
+    <div class="script-block">
+      <div class="label"><span class="ru-text">Механизм — 2 минуты</span><span class="uz-text">Mexanizm — 2 daqiqa</span></div>
+      <div class="text ru">«В организме идёт один процесс — кортизол, гормон стресса. Мало спите, много сидите, едите как попало — кортизол растёт, организм откладывает жир на животе. Это первое. Второе — жир на животе превращает тестостерон в женский гормон. Поэтому ваше «нет энергии» — это не ваша вина, это биология. Замкнутый круг: мало сна → кортизол → жир → тестостерон падает → энергии нет → стресс. Силой воли это не сломать. Только системой.»</div>
+      <div class="text uz">«Sizning organizmingizda hozir bitta jarayon ketyapti — kortizol stress gormoni. Kam uxlasangiz, ko'p o'tirsangiz, tartibsiz ovqatlansangiz — kortizol ko'tariladi va organizm qoringa yog' yig'a boshlaydi. Bu birinchisi. Ikkinchi qism — qorin yog'i testosteronni ayollik gormoniga aylantiradi. Shuning uchun siz aytgan 'energiyam yo'q' — bu sizning aybingiz emas, bu biologiya. Bu yopiq doira: kam uyqu → kortizol → yog' → testosteron tushadi → energiya yo'q → yana stress. Iroda kuchi bilan sindirib bo'lmaydi. Faqat tizim bilan.»</div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step" id="step6">
+    <div class="step-bg-num">6</div>
+    <div class="step-head">
+      <div class="step-badge">6</div>
+      <div class="step-titles">
+        <h3><span class="ru-text">Кейсы и примеры</span><span class="uz-text">Keyslar va misollar</span></h3>
+        <div class="step-time">2–3 <span class="ru-text">минуты</span><span class="uz-text">daqiqa</span></div>
+      </div>
+    </div>
+    <div class="step-goal">
+      <strong><span class="ru-text">Цель:</span><span class="uz-text">Maqsad:</span></strong>
+      <span class="ru-text"> Показать что работает. Выбери кейс по сходству.</span>
+      <span class="uz-text"> Ishlashini ko'rsatish. O'xshashlik bo'yicha keys tanlang.</span>
+    </div>
+    <div class="hint"><strong>Mirjahon</strong> — <span class="ru-text">25–30 лет, 85–100 kg. </span><span class="uz-text">25–30 yosh, 85–100 kg. </span><strong>Shahobiddin</strong> — <span class="ru-text">30–40 лет, 100+ kg, тяжёлая ситуация.</span><span class="uz-text">30–40 yosh, 100+ kg, og'ir holat.</span></div>
+    <div class="script-block">
+      <div class="label">Mirjahon</div>
+      <div class="text ru">«Дам пример. Mirjahon. Очень похож на вас — 25 лет, было 110 kg. Каждый понедельник новая жизнь: диета, зал, "теперь точно". На 4-й день срыв. Написал мне: "Iroda yo'q, men zaifman". Я ответил: "У тебя есть iroda — у тебя нет системы". Сделали систему под его график. Через 3 месяца — минус 11 kg, мышцы растут, энергия вернулась. До сих пор в системе. Ваша ситуация очень похожа.»</div>
+      <div class="text uz">«Sizga bir misol aytaman. Mirjahon. Sizga juda yaqin — 25 yosh, 110 kg edi. Har dushanba yangi hayot boshlardi: parhez, zal, "endi qattiq turaman". 4-chi kuni buzilardi. Menga yozdi: 'Irodam yo'q, men zaifman.' Men javob berdim: 'Sening iroding bor — sening tiziming yo'q.' Uning kun jadvali bilan ishladik. 3 oydan keyin — minus 11 kg, mushak o'sa boshladi, energiya qaytdi. Sizning holatingizga juda o'xshash.»</div>
+    </div>
+    <div class="script-block">
+      <div class="label">Shahobiddin</div>
+      <div class="text ru">«Shahobiddin — 34 года, было 128 kg. По лестнице — одышка, давление, врач предупредил. Написал: "Уже не смогу измениться". Через 3 месяца: минус 15 kg, давление в норме, мужская сила вернулась.»</div>
+      <div class="text uz">«Shahobiddin — 34 yosh, 128 kg edi. Zinapoyadan chiqsa hansirardi, qon bosimi ko'tarilgan. Shifokor ogohlantirgan. Menga yozib dedi: 'Endi o'zgara olmayman.' 3 oydan keyin: minus 15 kg, qon bosimi normallashdi, erkaklik quvvati qaytdi.»</div>
+    </div>
+  </div>
+
+  <!-- STEP 7 -->
+  <div class="step" id="step7">
+    <div class="step-bg-num">7</div>
+    <div class="step-head">
+      <div class="step-badge">7</div>
+      <div class="step-titles">
+        <h3><span class="ru-text">Оффер + цена</span><span class="uz-text">Taklif + narx</span></h3>
+        <div class="step-time">3–4 <span class="ru-text">минуты</span><span class="uz-text">daqiqa</span></div>
+      </div>
+    </div>
+    <div class="step-goal">
+      <strong><span class="ru-text">Структура:</span><span class="uz-text">Tuzilma:</span></strong>
+      <span class="ru-text"> что → срок → формат → гарантия → цена → дефицит.</span>
+      <span class="uz-text"> nima → muddat → format → kafolat → narx → defitsit.</span>
+    </div>
+    <div class="script-block">
+      <div class="label"><span class="ru-text">Результат + срок</span><span class="uz-text">Natija + muddat</span></div>
+      <div class="text ru">«За 8–12 недель доведу до результата: минус 10–15 kg, живот уходит, тестостерон возвращается, энергия возвращается, и главное — это становится образом жизни, обратно не наберёте. Первые заметные изменения — за 7–14 дней.»</div>
+      <div class="text uz">«Sizga 8–12 hafta ichida olib boraman quyidagi natijaga: minus 10–15 kg vazn, qorin yog'i ketadi, testosteron qaytadi, energiya qaytadi va eng muhimi — bu hayot tarziga aylanadi, qaytib semirmaysiz. Birinchi sezilarli o'zgarish 7–14 kun ichida.»</div>
+    </div>
+    <div class="script-block">
+      <div class="label"><span class="ru-text">Гарантия — сильнее urgency</span><span class="uz-text">Kafolat — urgencydan kuchliroq</span></div>
+      <div class="text ru">«Моя гарантия: за 30 дней нет результата — деньги полностью возвращаются. И сверх того — следующие 30 дней бесплатно в системе. Риск с моей стороны, не с вашей.»</div>
+      <div class="text uz">«Mening tomonimdan kafolat: 30 kun ichida natija bo'lmasa, pulingiz to'liq qaytariladi. Va shundan tashqari — keyingi 30 kun bizning tizimda bepul davom ettirasiz. Ya'ni xavf men tomondan, sizdan emas.»</div>
+    </div>
+    <div class="danger"><strong>⛔ <span class="ru-text">Критично:</span><span class="uz-text">Muhim:</span></strong> <span class="ru-text">После цены — МОЛЧИ 30 секунд. Кто первый заговорит — проиграл.</span><span class="uz-text">Narxdan keyin — JIM TUR 30 soniya. Kim birinchi gapirsa — yutqazadi.</span></div>
+  </div>
+
+  <!-- STEP 8 -->
+  <div class="step" id="step8">
+    <div class="step-bg-num">8</div>
+    <div class="step-head">
+      <div class="step-badge">8</div>
+      <div class="step-titles">
+        <h3><span class="ru-text">Закрытие без давления</span><span class="uz-text">Bosimsiz yopish</span></h3>
+        <div class="step-time">2–3 <span class="ru-text">минуты</span><span class="uz-text">daqiqa</span></div>
+      </div>
+    </div>
+    <div class="step-goal">
+      <strong><span class="ru-text">Цель:</span><span class="uz-text">Maqsad:</span></strong>
+      <span class="ru-text"> Мягко предложить. Оставь выбор. Молчи после вопроса.</span>
+      <span class="uz-text"> Yumshoq taklif qilish. Tanlovni qoldiring. Savoldan keyin jim turing.</span>
+    </div>
+    <div class="script-block">
+      <div class="label"><span class="ru-text">Мягкий вопрос</span><span class="uz-text">Yumshoq savol</span></div>
+      <div class="text ru">«[Имя], я всё рассказал. Как вам? Вопросы есть?»</div>
+      <div class="text uz">«[Ism], men aytdim hammasini. Sizga qanday tuyuldi? Savol bormi?»</div>
+    </div>
+    <div class="script-block">
+      <div class="label"><span class="ru-text">Закрывающий вопрос</span><span class="uz-text">Yopuvchi savol</span></div>
+      <div class="text ru">«Готовы начать или сначала уточнить что-то нужно?»</div>
+      <div class="text uz">«Boshlashga tayyormisiz, yoki avval biror narsa aniqlashtirmoq kerakmi?»</div>
+    </div>
+    <div class="script-block">
+      <div class="label"><span class="ru-text">Если «HA, tayyorman»</span><span class="uz-text">Agar "HA, tayyorman"</span></div>
+      <div class="text ru">«Отличное решение. Сейчас через Telegram отправлю реквизиты. Скриншот оплаты — и за 2 минуты добавлю в канал. Ваш username в Telegram?»</div>
+      <div class="text uz">«Yaxshi qaror. Hozir Telegram orqali sizga karta raqamini yuboraman. To'lov qilingach screenshot yuboring — 2 daqiqa ichida sizni kanalga qo'shaman. Sizning Telegram username qanday?»</div>
+    </div>
+  </div>
+</section>
+
+<!-- MECHANISM -->
+<section class="section" id="mech">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="ru-text">Продукт</span><span class="uz-text">Mahsulot</span></div>
+    <h2 class="section-title"><span class="ru-text">5-шаговая система</span><span class="uz-text">5-qadamli tizim</span></h2>
+    <p class="section-sub"><span class="ru-text">Путь к результату за 8–12 недель</span><span class="uz-text">8–12 hafta ichida natijaga yo'l</span></p>
+  </div>
+  <div class="mech-grid">
+    <div class="mech-card">
+      <div class="step-no">1</div>
+      <h4>UYQU · <span class="ru-text">Сон</span><span class="uz-text">Uyqu</span></h4>
+      <p><span class="ru-text">22:00–23:00 отбой. Кортизол падает. Первый результат — 7 дней.</span><span class="uz-text">22:00–23:00 yotish. Kortizol tushadi. Birinchi natija — 7 kun.</span></p>
+    </div>
+    <div class="mech-card">
+      <div class="step-no">2</div>
+      <h4>OVQAT · <span class="ru-text">Питание</span><span class="uz-text">Ovqatlanish</span></h4>
+      <p><span class="ru-text">Без диет. Палов, сомса, мясо. Убираем вредное, добавляем белок.</span><span class="uz-text">Parhez yo'q. Palov, somsa, go'sht. Zararli olib tashlanadi, oqsil qo'shiladi.</span></p>
+    </div>
+    <div class="mech-card">
+      <div class="step-no">3</div>
+      <h4>HARAKAT · <span class="ru-text">Движение</span><span class="uz-text">Harakat</span></h4>
+      <p><span class="ru-text">30 мин/день. Зал не нужен. Отжимания, приседания, ходьба.</span><span class="uz-text">Kuniga 30 daqiqa. Zal kerak emas. Otjimaniya, prises, piyoda yurish.</span></p>
+    </div>
+    <div class="mech-card">
+      <div class="step-no">4</div>
+      <h4>GORMONLAR · <span class="ru-text">Гормоны</span><span class="uz-text">Gormonlar</span></h4>
+      <p><span class="ru-text">Тестостерон растёт за 5–7 дней. Без БАДов, без таблеток.</span><span class="uz-text">Testosteron 5–7 kunda ko'tariladi. BADsiz, dorisiz.</span></p>
+    </div>
+    <div class="mech-card">
+      <div class="step-no">5</div>
+      <h4>TIZIM · <span class="ru-text">Система</span><span class="uz-text">Tizim</span></h4>
+      <p><span class="ru-text">Один раз учишься — становится образом жизни. В 50 такой же.</span><span class="uz-text">Bir marta o'rganasiz — hayot tarziga aylanadi. 50 yoshda ham shunday.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="section" id="cases">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="ru-text">Социальное доказательство</span><span class="uz-text">Ijtimoiy isbot</span></div>
+    <h2 class="section-title"><span class="ru-text">Кейсы клиентов</span><span class="uz-text">Mijozlar keysi</span></h2>
+  </div>
+  <div class="cases">
+    <div class="case">
+      <h4 style="color:var(--cyan)">MIRJAHON</h4>
+      <div class="meta">25 <span class="ru-text">лет</span><span class="uz-text">yosh</span> · 110 → 99 kg</div>
+      <div class="case-stats">
+        <div class="case-stat"><div class="v">−11 kg</div><div class="l">3 <span class="ru-text">мес</span><span class="uz-text">oy</span></div></div>
+        <div class="case-stat"><div class="v">+<span class="ru-text">мышцы</span><span class="uz-text">mushak</span></div><div class="l"><span class="ru-text">рост</span><span class="uz-text">o'sish</span></div></div>
+        <div class="case-stat"><div class="v">100%</div><div class="l"><span class="ru-text">в системе</span><span class="uz-text">tizimda</span></div></div>
+      </div>
+      <div class="story"><span class="ru-text">"Sening iroding bor — sening tiziming yo'q". До: каждый понедельник новая жизнь, 4-й день срыв.</span><span class="uz-text">"Sening iroding bor — sening tiziming yo'q". Avval: har dushanba yangi hayot, 4-chi kuni buzilish.</span></div>
+    </div>
+    <div class="case">
+      <h4 style="color:var(--purple)">SHAHOBIDDIN</h4>
+      <div class="meta">34 <span class="ru-text">года</span><span class="uz-text">yosh</span> · 128 → 113 kg</div>
+      <div class="case-stats">
+        <div class="case-stat"><div class="v">−15 kg</div><div class="l">3 <span class="ru-text">мес</span><span class="uz-text">oy</span></div></div>
+        <div class="case-stat"><div class="v"><span class="ru-text">норма</span><span class="uz-text">norm</span></div><div class="l"><span class="ru-text">давление</span><span class="uz-text">bosim</span></div></div>
+        <div class="case-stat"><div class="v">+T</div><div class="l"><span class="ru-text">тестостерон</span><span class="uz-text">testosteron</span></div></div>
+      </div>
+      <div class="story"><span class="ru-text">Одышка на лестнице, давление, предупреждение врача. До звонка: "Endi o'zgara olmayman".</span><span class="uz-text">Zinapoyada hansirash, qon bosimi, shifokor ogohlantirishi. Suhbatdan oldin: "Endi o'zgara olmayman".</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="ru-text">3 тарифа</span><span class="uz-text">3 tarif</span></div>
+    <h2 class="section-title"><span class="ru-text">Beta · Premium · VIP</span><span class="uz-text">Beta · Premium · VIP</span></h2>
+    <p class="section-sub"><span class="ru-text">Hormozi Value Equation + Anchor Pricing</span><span class="uz-text">Hormozi Value Equation + Anchor Pricing</span></p>
+  </div>
+  <div class="tariffs">
+    <!-- BETA -->
+    <div class="tariff beta">
+      <div class="tariff-tag">BETA · <span class="ru-text">30 МЕСТ</span><span class="uz-text">30 JOY</span></div>
+      <div class="tariff-name">Founding Members</div>
+      <div class="tariff-price">590 000 <span class="cur">so'm</span></div>
+      <div class="tariff-anchor">9 330 000 so'm</div>
+      <div class="tariff-saving">−8 740 000 so'm (93.7%)</div>
+      <hr>
+      <ul class="tariff-features">
+        <li><span class="ru-text">5 видео-модулей</span><span class="uz-text">5 video-modul</span></li>
+        <li><span class="ru-text">3 PDF qo'llanmalari</span><span class="uz-text">3 ta PDF qo'llanma</span></li>
+        <li><span class="ru-text">Закрытый Telegram + чат</span><span class="uz-text">Yopiq Telegram + chat</span></li>
+        <li><span class="ru-text">Еженедельный Zoom</span><span class="uz-text">Haftalik Zoom</span></li>
+        <li>30 + 30 kafolat</li>
+        <li class="bonus">Founding member status</li>
+        <li class="bonus"><span class="ru-text">Авто-VIP при релизе бесплатно</span><span class="uz-text">Reliz chiqgach avto-VIP bepul</span></li>
+      </ul>
+    </div>
+    <!-- PREMIUM -->
+    <div class="tariff premium">
+      <div class="tariff-tag">PREMIUM · 80% <span class="ru-text">КЛИЕНТОВ</span><span class="uz-text">MIJOZ</span></div>
+      <div class="tariff-name"><span class="ru-text">Основной</span><span class="uz-text">Asosiy</span></div>
+      <div class="tariff-price">1 250 000 <span class="cur">so'm</span></div>
+      <div class="tariff-anchor">6 630 000 so'm</div>
+      <div class="tariff-saving">−5 380 000 so'm (81%)</div>
+      <hr>
+      <ul class="tariff-features">
+        <li><span class="ru-text">5 видео-модулей</span><span class="uz-text">5 video-modul</span></li>
+        <li><span class="ru-text">3 PDF qo'llanmalari</span><span class="uz-text">3 ta PDF qo'llanma</span></li>
+        <li><span class="ru-text">Закрытый Telegram + чат</span><span class="uz-text">Yopiq Telegram + chat</span></li>
+        <li><span class="ru-text">Еженедельный Zoom (Shodiyor)</span><span class="uz-text">Haftalik Zoom (Shodiyor)</span></li>
+        <li><span class="ru-text">Эксклюзивные обновления</span><span class="uz-text">Eksklyuziv yangilanishlar</span></li>
+        <li>30 + 30 kafolat</li>
+      </ul>
+    </div>
+    <!-- VIP -->
+    <div class="tariff vip">
+      <div class="tariff-tag">VIP · ANCHOR</div>
+      <div class="tariff-name"><span class="ru-text">Премиум-сегмент</span><span class="uz-text">Premium segment</span></div>
+      <div class="tariff-price">2 990 000 <span class="cur">so'm</span></div>
+      <div class="tariff-anchor">10 990 000 so'm</div>
+      <div class="tariff-saving">−8 000 000 so'm (72.8%)</div>
+      <hr>
+      <ul class="tariff-features">
+        <li><span class="ru-text">Всё из Premium</span><span class="uz-text">Premium'ning hammasi</span></li>
+        <li><span class="ru-text">3 личные 30-мин консультации</span><span class="uz-text">3 ta shaxsiy 30-daqiqalik konsultatsiya</span></li>
+        <li><span class="ru-text">Персональный план питания</span><span class="uz-text">Shaxsiy ovqatlanish rejasi</span></li>
+        <li><span class="ru-text">Личное сопровождение 1-й недели</span><span class="uz-text">Birinchi hafta shaxsiy yo'naltirish</span></li>
+        <li><span class="ru-text">Прямой DM Shodiyor</span><span class="uz-text">To'g'ridan-to'g'ri DM Shodiyor</span></li>
+        <li><span class="ru-text">Приоритет в чате</span><span class="uz-text">Chatda prioritet</span></li>
+        <li><span class="ru-text">VIP-канал advanced контента</span><span class="uz-text">VIP eksklyuziv kontent</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PRICING CHART -->
+  <div class="charts-grid" style="margin-top:32px">
+    <div class="chart-card">
+      <h4><span class="ru-text">Сравнение цен (so'm)</span><span class="uz-text">Narxlarni taqqoslash (so'm)</span></h4>
+      <div class="chart-wrapper"><canvas id="priceChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h4><span class="ru-text">Bozor qiymati vs Ваша цена</span><span class="uz-text">Bozor qiymati vs Sizning narxingiz</span></h4>
+      <div class="chart-wrapper"><canvas id="valueChart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE STACK -->
+<section class="section" id="vstack">
+  <div class="section-head">
+    <div class="section-eyebrow">Value Stack</div>
+    <h2 class="section-title"><span class="ru-text">Детальный расчёт по тарифам</span><span class="uz-text">Tariflar bo'yicha batafsil hisob</span></h2>
+    <p class="section-sub"><span class="ru-text">«Цена — это не число, это сравнение». Anchor-цены на узбекском рынке.</span><span class="uz-text">"Narx — bu raqam emas, bu taqqoslash". Anchor narxlar O'zbekiston bozorida.</span></p>
+  </div>
+
+  <!-- BETA -->
+  <div class="vstack">
+    <h4>🟢 BETA · 590 000 so'm</h4>
+    <table>
+      <thead><tr><th>Komponent</th><th>Bozor narxi</th><th>UzbekGen</th></tr></thead>
+      <tbody>
+        <tr><td>5 video-modul (kurs)</td><td>2 500 000</td><td>✓</td></tr>
+        <tr><td>PDF Trening Dasturi (16 str)</td><td>590 000</td><td>✓</td></tr>
+        <tr><td>PDF Ovqatlanish Rejasi (9 str)</td><td>490 000</td><td>✓</td></tr>
+        <tr><td>PDF Kortizol Protokoli (10 str)</td><td>290 000</td><td>✓</td></tr>
+        <tr><td>Yopiq Telegram + maxsus chat</td><td>870 000</td><td>✓</td></tr>
+        <tr><td>8 ta haftalik gruppa Zoom</td><td>1 600 000</td><td>✓</td></tr>
+        <tr><td>Founding member status</td><td>—</td><td>✓</td></tr>
+        <tr><td>🎁 BONUS: VIP doirada bepul qolish</td><td>2 990 000</td><td>✓</td></tr>
+        <tr><td>30 + 30 kafolat</td><td>—</td><td>✓</td></tr>
+        <tr class="total"><td>JAMI BOZOR QIYMATI</td><td>9 330 000</td><td>590 000</td></tr>
+        <tr class="saving-row"><td colspan="3"><span class="ru-text">ЭКОНОМИЯ:</span><span class="uz-text">TEJALADI:</span> 8 740 000 so'm (93.7%)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PREMIUM -->
+  <div class="vstack">
+    <h4>🔵 PREMIUM · 1 250 000 so'm</h4>
+    <table>
+      <thead><tr><th>Komponent</th><th>Bozor narxi</th><th>UzbekGen</th></tr></thead>
+      <tbody>
+        <tr><td>5 video-modul (kurs)</td><td>2 500 000</td><td>✓</td></tr>
+        <tr><td>PDF Trening Dasturi (16 str)</td><td>590 000</td><td>✓</td></tr>
+        <tr><td>PDF Ovqatlanish Rejasi (9 str)</td><td>490 000</td><td>✓</td></tr>
+        <tr><td>PDF Kortizol Protokoli (10 str)</td><td>290 000</td><td>✓</td></tr>
+        <tr><td>Yopiq Telegram + maxsus chat</td><td>870 000</td><td>✓</td></tr>
+        <tr><td>8 ta haftalik gruppa Zoom</td><td>1 600 000</td><td>✓</td></tr>
+        <tr><td>Yangilanishlar bonus</td><td>290 000</td><td>✓</td></tr>
+        <tr><td>30 + 30 kafolat</td><td>—</td><td>✓</td></tr>
+        <tr class="total"><td>JAMI BOZOR QIYMATI</td><td>6 630 000</td><td>1 250 000</td></tr>
+        <tr class="saving-row"><td colspan="3"><span class="ru-text">ЭКОНОМИЯ:</span><span class="uz-text">TEJALADI:</span> 5 380 000 so'm (81%)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- VIP -->
+  <div class="vstack">
+    <h4>🟣 VIP · 2 990 000 so'm</h4>
+    <table>
+      <thead><tr><th>Komponent</th><th>Bozor narxi</th><th>UzbekGen</th></tr></thead>
+      <tbody>
+        <tr><td>JAMI Premium ichida bor</td><td>6 630 000</td><td>✓</td></tr>
+        <tr><td>3 ta shaxsiy konsultatsiya (90 daqiqa)</td><td>1 500 000</td><td>✓</td></tr>
+        <tr><td>Shaxsiy ovqatlanish rejasi</td><td>990 000</td><td>✓</td></tr>
+        <tr><td>Birinchi hafta shaxsan yo'naltirish</td><td>590 000</td><td>✓</td></tr>
+        <tr><td>Direct DM access (3 oy)</td><td>790 000</td><td>✓</td></tr>
+        <tr><td>VIP eksklyuziv kontent</td><td>490 000</td><td>✓</td></tr>
+        <tr class="total"><td>JAMI BOZOR QIYMATI</td><td>10 990 000</td><td>2 990 000</td></tr>
+        <tr class="saving-row"><td colspan="3"><span class="ru-text">ЭКОНОМИЯ:</span><span class="uz-text">TEJALADI:</span> 8 000 000 so'm (72.8%)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- MENU CLOSE -->
+<section class="section" id="close">
+  <div class="section-head">
+    <div class="section-eyebrow">Menu Close</div>
+    <h2 class="section-title"><span class="ru-text">Презентация цены на звонке</span><span class="uz-text">Suhbatda narx taqdimoti</span></h2>
+    <p class="section-sub"><span class="ru-text">Сначала VIP — anchor эффект. Premium кажется разумным.</span><span class="uz-text">Avval VIP — anchor effekti. Premium oqilona ko'rinadi.</span></p>
+  </div>
+
+  <div class="menu-close">
+    <h4>🟣 1) VIP · 2 990 000 so'm</h4>
+    <p>
+      <span class="ru-text">«Первый вариант — VIP, 2 990 000 so'm. Максимальный результат в кратчайший срок. Premium полностью + 3 личные консультации со мной + персональный план питания под ваш дастурхан + я лично сопровождаю первую неделю + прямой DM со мной.»</span>
+      <span class="uz-text">«Birinchisi VIP — 2 990 000 so'm. Bu maksimum natija eng tez vaqtda. Premium'ning hammasi + 3 ta shaxsiy konsultatsiya men bilan + sizga shaxsiy ovqatlanish rejasi — sizning dasturxoningizdan + birinchi haftada men sizga shaxsan yo'naltiraman + Telegram'da to'g'ridan-to'g'ri menga yozasiz.»</span>
+    </p>
+  </div>
+
+  <div class="menu-close" style="border-color:var(--cyan)">
+    <h4 style="color:#22d3ee">🔵 2) Premium · 1 250 000 so'm</h4>
+    <p>
+      <span class="ru-text">«Второй — Premium, 1 250 000 so'm. Это берут 80% моих клиентов. Закрытый канал + 8 модулей + чат поддержки + еженедельный Zoom со мной + 3 PDF. Обе опции — гарантия 30 + 30 дней.»</span>
+      <span class="uz-text">«Ikkinchisi Premium — 1 250 000 so'm. Bu eng ko'p mijozlarim oladigan format. 80% odamlar shu yo'l. Yopiq kanal + 8 ta haftalik modul + maxsus chat + har hafta gruppa Zoom (men o'zim) + 3 ta PDF qo'llanma. Va ikkala variant — 30 kun kafolat + 30 kun bepul davom etish.»</span>
+    </p>
+  </div>
+
+  <div class="menu-close" style="border-color:var(--green)">
+    <h4 style="color:#4ade80">🟢 3) Beta · 590 000 so'm <span style="font-size:13px;color:var(--text-mute)">— <span class="ru-text">козырь в конце</span><span class="uz-text">oxirgi karta</span></span></h4>
+    <p>
+      <span class="ru-text">«Но скажу важное. Сейчас мы в Beta cohort. Для первых 30 человек — специальная цена 590 000 so'm. Это полная версия Premium. И бонус — после релиза вы автоматически переходите в VIP, бесплатно. Это <span class="num-highlight">4 000 000 so'm</span> ценности. В Beta я на [N]-м месте. 30 мест заполнится — закрывается. Какой вариант вам подходит?»</span>
+      <span class="uz-text">«Lekin sizga aytaman muhim narsani. Hozir biz Beta cohortdamiz. Birinchi 30 ta odam uchun maxsus narx — 590 000 so'm. Bu Premium'ning to'liq versiyasi. Va yana bonus — to'liq reliz chiqqach, siz avtomatik VIP'ga o'tasiz, bepul. Demak hozir 590 000 to'laysiz va siz olasiz Premium + bonus VIP keyinroq. Bu <span class="num-highlight">4 000 000 so'm</span>lik qiymat. Beta'da [N]-chi joydaman. 30 ta joyni to'lganda yopiladi. Sizga qaysi yo'l to'g'ri keladi?»</span>
+    </p>
+  </div>
+</section>
+
+<!-- ECONOMY -->
+<section class="section" id="economy">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="ru-text">Экономика</span><span class="uz-text">Iqtisodiyot</span></div>
+    <h2 class="section-title"><span class="ru-text">Как работает Mix</span><span class="uz-text">Mix qanday ishlaydi</span></h2>
+    <p class="section-sub"><span class="ru-text">Наличие VIP поднимает выручку на 33% — за счёт anchor эффекта.</span><span class="uz-text">VIP mavjudligi daromadni 33% ga oshiradi — anchor effekti hisobiga.</span></p>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h4><span class="ru-text">Распределение продаж на 100 клиентов</span><span class="uz-text">100 mijozga sotuvlar taqsimoti</span></h4>
+      <div class="chart-wrapper"><canvas id="mixChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h4><span class="ru-text">Выручка: с VIP vs без VIP</span><span class="uz-text">Daromad: VIP bilan vs VIPsiz</span></h4>
+      <div class="chart-wrapper"><canvas id="revChart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIONS -->
+<section class="section" id="objs">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="ru-text">Обработка возражений</span><span class="uz-text">E'tirozlarni qayta ishlash</span></div>
+    <h2 class="section-title"><span class="ru-text">6 типовых возражений</span><span class="uz-text">6 ta tipik e'tiroz</span></h2>
+  </div>
+  <div class="objs">
+    <div class="obj">
+      <div class="obj-q">«Hozir pulim yo'q»</div>
+      <div class="obj-a">
+        <div class="ru">«Сколько лет уже не решаете эту проблему? Год? Два? Сколько потрачено на БАДы, диеты, аптеку? Beta 590k — это ваш месячный "qora ovqat". Это не расход, это инвестиция в здоровье.»</div>
+        <div class="uz">«Tushundim. Sizga ochig'ini aytmoqchiman — bu muammoni qancha vaqtdan beri hal qila olmayapsiz? 1 yil? 2 yil? Shu vaqt ichida BAD, parhez, dorixonadagi narsalarga qancha pul ketdi? Hisoblang. Bizning Beta narx 590 000 — bu sizning 1 oylik "qora ovqat" puli. Bu xarajat emas, sog'lig'ingizga investitsiya.»</div>
+      </div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">«O'ylab ko'raman»</div>
+      <div class="obj-a">
+        <div class="ru">«Конкретно о чём — цена, формат, время или сомневаетесь во мне? Скажите, разберём вместе. "O'ylab ko'raman" — маска реального возражения.»</div>
+        <div class="uz">«Albatta. Aniq nima haqida o'ylash kerak — narxmi, formatmi, vaqtmi yoki mendan shubhamizmi? Aytib bering, birga ko'rib chiqamiz.»</div>
+      </div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">«Maslahatlashaman»</div>
+      <div class="obj-a">
+        <div class="ru">«Жена хочет чтобы живот ушёл и энергия вернулась — правильно? Она сама вам говорит "займись спортом". Скажете: "Я нашёл путь". Она будет ЗА. Beta только эту неделю — сегодня обсудите, завтра оплата?»</div>
+        <div class="uz">«Bu yaxshi. Lekin sizga ochig'ini aytaman — xotiningiz aslida nimani xohlaydi sizdan? Qoringiz ketishini va energiyangiz qaytishini, to'g'rimi? Ehtimol u o'zi sizga aytib keladi "sport bilan shug'illaning". Endi siz aytasiz: 'Men yo'l topdim.' U albatta ROZI bo'ladi. Beta narx faqat shu hafta — bugun maslahatlashing, ertaga to'laysizmi?»</div>
+      </div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">«Avval o'zim harakat qilaman»</div>
+      <div class="obj-a">
+        <div class="ru">«Вы сами сказали — пробовали 3 раза, 3 раза бросали. Это не ваша вина, не было системы. Один — 4-й раз бросите. С системой — за 3 месяца. Выбор за вами.»</div>
+        <div class="uz">«[Ism], siz o'zingiz aytdingiz — [3 marta urindingiz, 3 marta tashladingiz]. Bu sizning aybingiz emas, tizim yo'q edi. Yana yolg'iz urinasiz — natija aniq qanday bo'ladi? 4-chi marta tashlab yuborasiz. Yoki bu safar tizim bilan tugatasiz — 3 oyda. Tanlov sizniki.»</div>
+      </div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">«Boshqalar arzonroq»</div>
+      <div class="obj-a">
+        <div class="ru">«Кто и сколько? Что дают — расписание зала или диету? У вас нет времени на зал, диета на 4-й день ломается. Мы работаем с дастурханом и гормонами + гарантия. У других гарантия есть?»</div>
+        <div class="uz">«Albatta beryapti — kim, qancha? Tushundim. Ular nima beradi — zalga jadval yoki parhez ro'yxati? Sizga vaqt yo'q zal uchun, va parhez 4-chi kuni buziladi. Biz boshqacha — dasturxon qoladi, gormonlar bilan ishlaymiz, va kafolat beramiz. Boshqalarda kafolat bormi?»</div>
+      </div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">«Vaqtim yo'q»</div>
+      <div class="obj-a">
+        <div class="ru">«Система — 30 минут в день. Сколько часов в день в Instagram и YouTube? Честно. 2–3? Значит время есть — вопрос куда тратить.»</div>
+        <div class="uz">«Bizning tizim kuniga 30 daqiqa. Hozir siz kunda necha soat Instagram va YouTube ko'rasiz? Halol. 2-3 soat? Demak vaqt bor — qaerga sarflashning farqi bor.»</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOLLOW UP -->
+<section class="section" id="followup">
+  <div class="section-head">
+    <div class="section-eyebrow">Follow-up</div>
+    <h2 class="section-title"><span class="ru-text">Дожим после "o'ylab ko'raman"</span><span class="uz-text">"O'ylab ko'raman" dan keyin urinish</span></h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="day"><span class="ru-text">День</span><span class="uz-text">Kun</span> 1</div>
+      <div class="text"><span class="ru-text">Спасибо за разговор. История Mirjahon + скриншот результата. «Он тоже сказал o'ylab ko'raman, сейчас −11 kg». Beta осталось N мест.</span><span class="uz-text">Rahmat suhbat uchun. Mirjahon hikoyasi + natija screenshoti. «U ham aytdi o'ylab ko'raman, hozir −11 kg». Beta'da N joy qoldi.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="day"><span class="ru-text">День</span><span class="uz-text">Kun</span> 2</div>
+      <div class="text"><span class="ru-text">Конкретный вопрос: «Основное препятствие — цена, время или сомнение во мне? Скажи честно — я здесь чтобы помочь».</span><span class="uz-text">Aniq savol: «Asosiy to'siq nima — narxmi, vaqtmi yoki shubhamizmi? Halol ayting — men sizga yordam berish uchun bormanu».</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="day"><span class="ru-text">День</span><span class="uz-text">Kun</span> 5 — <span class="ru-text">финальный</span><span class="uz-text">yakuniy</span></div>
+      <div class="text"><span class="ru-text">«Beta cohort закрывается завтра. N мест осталось. Сегодня/завтра — Beta цена. Дальше Main 1 250 000. Решение принял?»</span><span class="uz-text">«Beta cohort ertaga yopiladi. N joy qoldi. Bugun yoki ertaga boshlasangiz — Beta narxda. Keyin Main narxiga o'tamiz — 1 250 000. Qaror qildingizmi?»</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="section" id="checklist">
+  <div class="section-head">
+    <div class="section-eyebrow">Checklist</div>
+    <h2 class="section-title"><span class="ru-text">Чеклист звонка</span><span class="uz-text">Suhbat checklisti</span></h2>
+    <p class="section-sub"><span class="ru-text">Кликай чтобы отмечать. Состояние сохраняется в этой сессии.</span><span class="uz-text">Belgilash uchun bosing. Holat ushbu sessiyada saqlanadi.</span></p>
+  </div>
+  <div class="checks">
+    <div class="check-col">
+      <h4><span class="ru-text">До звонка</span><span class="uz-text">Suhbatdan oldin</span></h4>
+      <ul class="check-list">
+        <li><span class="ru-text">Источник лида известен</span><span class="uz-text">Lid manbasi ma'lum</span></li>
+        <li><span class="ru-text">Возраст и вес прочитаны</span><span class="uz-text">Yosh va vazn o'qilgan</span></li>
+        <li><span class="ru-text">Блокнот для записи открыт</span><span class="uz-text">Yozish uchun bloknot ochiq</span></li>
+        <li><span class="ru-text">Beta — сколько мест занято</span><span class="uz-text">Beta — necha joy band</span></li>
+        <li><span class="ru-text">Реквизиты для DM готовы</span><span class="uz-text">DM rekvizitlari tayyor</span></li>
+      </ul>
+    </div>
+    <div class="check-col">
+      <h4><span class="ru-text">Во время звонка</span><span class="uz-text">Suhbat paytida</span></h4>
+      <ul class="check-list">
+        <li><span class="ru-text">Слушаю 70%, говорю 30%</span><span class="uz-text">70% tinglayman, 30% gapiraman</span></li>
+        <li><span class="ru-text">Записываю фразы дословно</span><span class="uz-text">Iboralarni so'zma-so'z yozaman</span></li>
+        <li><span class="ru-text">Не перебиваю</span><span class="uz-text">Gapni bo'lmayman</span></li>
+        <li><span class="ru-text">Кейс выбран по сходству</span><span class="uz-text">O'xshashlik bo'yicha keys tanlangan</span></li>
+        <li><span class="ru-text">После цены — молчание</span><span class="uz-text">Narxdan keyin — jimlik</span></li>
+      </ul>
+    </div>
+    <div class="check-col">
+      <h4><span class="ru-text">После звонка</span><span class="uz-text">Suhbatdan keyin</span></h4>
+      <ul class="check-list">
+        <li><span class="ru-text">Записал в CRM статус</span><span class="uz-text">CRM ga status yozildi</span></li>
+        <li><span class="ru-text">Closed → DM за 1 минуту</span><span class="uz-text">Closed → 1 daqiqada DM</span></li>
+        <li><span class="ru-text">Не closed → Beta счёт не трогать</span><span class="uz-text">Closed emas → Beta hisobini tegmaslik</span></li>
+        <li><span class="ru-text">Follow-up: дни 1, 2, 5</span><span class="uz-text">Follow-up: 1, 2, 5-kunlar</span></li>
+        <li><span class="ru-text">Записал что улучшить</span><span class="uz-text">Nimani yaxshilash kerakligini yozdim</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  UzbekGen · Sales Cheatsheet · v1.0 · <span class="ru-text">Май 2026</span><span class="uz-text">May 2026</span>
+  <br><br>
+  <span class="ru-text">ICP: O'zbek erkak, 25–35 yosh, oilali · qorin yog'i · energiya yo'q</span>
+  <span class="uz-text">ICP: O'zbek erkak, 25–35 yosh, oilali · qorin yog'i · energiya yo'q</span>
+</footer>
+
+<script>
+// LANGUAGE TOGGLE
+document.querySelectorAll('.lang-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const lang = btn.dataset.lang;
+    document.body.className = 'lang-'+lang;
+    document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// CHECKLIST TOGGLE
+document.querySelectorAll('.check-list li').forEach(li=>{
+  li.addEventListener('click',()=>{
+    li.classList.toggle('done');
+  });
+});
+
+// CHART DEFAULTS
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = '#1f2b46';
+Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif';
+
+// TIMING
+new Chart(document.getElementById('timingChart'), {
+  type: 'bar',
+  data: {
+    labels: ['1','2','3','4','5','6','7','8'],
+    datasets: [{
+      label: 'min',
+      data: [1.5, 3.5, 5.5, 3.5, 4.5, 2.5, 3.5, 2.5],
+      backgroundColor: ['#4ade80','#22d3ee','#f87171','#fbbf24','#a78bfa','#f472b6','#60a5fa','#34d399'],
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, grid: { color: '#1f2b46' } }, x: { grid: { display: false } } }
+  }
+});
+
+// LISTEN
+new Chart(document.getElementById('listenChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Listen 70%', 'Speak 30%'],
+    datasets: [{
+      data: [70, 30],
+      backgroundColor: ['#4ade80', '#1f2b46'],
+      borderColor: '#0a0e1a', borderWidth: 4
+    }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+});
+
+// PRICE
+new Chart(document.getElementById('priceChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Beta', 'Premium', 'VIP'],
+    datasets: [{
+      data: [590000, 1250000, 2990000],
+      backgroundColor: ['#4ade80', '#22d3ee', '#a78bfa'],
+      borderRadius: 10
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y.toLocaleString('ru-RU') + " so'm" } } },
+    scales: { y: { beginAtZero: true, grid: { color: '#1f2b46' }, ticks: { callback: v => (v/1000)+'k' } }, x: { grid: { display: false } } }
+  }
+});
+
+// VALUE
+new Chart(document.getElementById('valueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Beta', 'Premium', 'VIP'],
+    datasets: [
+      { label: 'Bozor qiymati', data: [9330000, 6630000, 10990000], backgroundColor: '#f87171', borderRadius: 8 },
+      { label: 'Sizning narxingiz', data: [590000, 1250000, 2990000], backgroundColor: '#4ade80', borderRadius: 8 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.parsed.y.toLocaleString('ru-RU') } } },
+    scales: { y: { beginAtZero: true, grid: { color: '#1f2b46' }, ticks: { callback: v => (v/1000000).toFixed(1)+'M' } }, x: { grid: { display: false } } }
+  }
+});
+
+// MIX
+new Chart(document.getElementById('mixChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Beta (30)', 'Premium (60)', 'VIP (10)'],
+    datasets: [{
+      data: [30, 60, 10],
+      backgroundColor: ['#4ade80', '#22d3ee', '#a78bfa'],
+      borderColor: '#0a0e1a', borderWidth: 4
+    }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+});
+
+// REVENUE
+new Chart(document.getElementById('revChart'), {
+  type: 'bar',
+  data: {
+    labels: ['С VIP / VIP bilan', 'Без VIP / VIPsiz'],
+    datasets: [{
+      data: [122600000, 92000000],
+      backgroundColor: ['#4ade80', '#f87171'],
+      borderRadius: 10
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x.toLocaleString('ru-RU') + " so'm" } } },
+    scales: { x: { beginAtZero: true, grid: { color: '#1f2b46' }, ticks: { callback: v => (v/1000000).toFixed(0)+'M' } }, y: { grid: { display: false } } }
+  }
+});
+</script>
+
+</body>
+</html>
